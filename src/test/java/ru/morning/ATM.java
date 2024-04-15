@@ -48,6 +48,15 @@ public class ATM {
      */
     public Boolean getMoney(int money) { // возвращаемое логическое значение данной ф-ции негде не реализовал,
         // по условиям задачи и не требовалось как я понял)
+        if(money<=0){
+            System.out.println("Не возможно снять отрицательное или нулевое значение");
+            return false;
+        }
+        if(money>(TWENTY*qtyTwenty+FIFTY*qtyFifty+HUNDRED*qtyHundred)){
+            System.out.println("Недостаточно средств в банкомате для выдачи наличных");
+            return false;
+        }
+
         int remainingAmount = money;    // переменная для расчёта оставшегося количества денежных средств
         int hundredsNeeded = Math.min(remainingAmount / HUNDRED, qtyHundred);   // выбираем мин. кол-во 100 купюр
         int fiftiesNeeded;
@@ -82,7 +91,7 @@ public class ATM {
                     "\nВыдано купюр номиналом 50: " + fiftiesNeeded +
                     "\nВыдано купюр номиналом 100: " + hundredsNeeded);
         } else {
-            System.out.println("Нетостаточно средств в банкомате для выдачи наличных");
+            System.out.println("Недостаточно необходимых купюр в банкомате для выдачи наличных");
             return false;
         }
         return true;
